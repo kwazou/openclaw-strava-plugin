@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 import * as path from "node:path";
-import type { AnyAgentTool, OpenClawPluginApi } from "openclaw/plugin-sdk";
+import type { AnyAgentTool, OpenClawPluginApi } from "openclaw/plugin-sdk/core";
 import { TokenStore, exchangeCode, buildAuthUrl, generateOAuthState } from "./src/oauth.js";
 import { createStravaTools } from "./src/tools.js";
 import type { StravaConfig } from "./src/types.js";

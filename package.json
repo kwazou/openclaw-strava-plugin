@@ -1,32 +1,33 @@
 {
-  "name": "@alexd10s/openclaw-strava",
-  "version": "0.1.1",
+  "name": "@kwazou/openclaw-strava",
+  "version": "0.2.0",
   "description": "Community Strava plugin for OpenClaw",
   "type": "module",
   "files": [
-    "index.ts",
+    "dist",
     "openclaw.plugin.json",
-    "src",
     "README.md"
   ],
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
     "test": "vitest run --config vitest.config.ts",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=22.14.0"
+    "node": ">=24.16.0 <25 || >=26.1.0"
   },
   "dependencies": {
-    "@sinclair/typebox": "0.34.49"
+    "@sinclair/typebox": "0.34.52"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "openclaw": "2026.3.31",
+    "openclaw": "2026.11.1",
     "typescript": "^6.0.2",
     "vitest": "^4.1.2"
   },
   "peerDependencies": {
-    "openclaw": ">=2026.3.31"
+    "openclaw": ">=2026.11.1"
   },
   "peerDependenciesMeta": {
     "openclaw": {
@@ -35,20 +36,20 @@
   },
   "openclaw": {
     "extensions": [
-      "./index.ts"
+      "./dist/index.js"
     ],
     "install": {
-      "npmSpec": "@alexd10s/openclaw-strava",
+      "npmSpec": "@kwazou/openclaw-strava",
       "defaultChoice": "npm",
-      "minHostVersion": ">=2026.3.31"
+      "minHostVersion": ">=2026.11.1"
     },
     "compat": {
-      "pluginApi": ">=2026.3.31",
-      "minGatewayVersion": "2026.3.31"
+      "pluginApi": ">=2026.11.1",
+      "minGatewayVersion": "2026.11.1"
     },
     "build": {
-      "openclawVersion": "2026.3.31",
-      "pluginSdkVersion": "2026.3.31"
+      "openclawVersion": "2026.11.1",
+      "pluginSdkVersion": "2026.11.1"
     }
   }
 }

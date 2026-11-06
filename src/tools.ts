@@ -13,22 +13,24 @@ interface ToolDeps {
 }
 
 function notConnectedResult(deps: ToolDeps) {
+  const result = {
+    connected: false,
+    message:
+      "Strava account not connected. Open the gateway link below from a browser signed into your OpenClaw gateway to authorize.",
+    connectUrl: deps.getConnectUrl(),
+  };
   return {
     content: [
       {
         type: "text" as const,
-        text: JSON.stringify({
-          connected: false,
-          message:
-            "Strava account not connected. Open the gateway link below from a browser signed into your OpenClaw gateway to authorize.",
-          connectUrl: deps.getConnectUrl(),
-        }),
+        text: JSON.stringify(result),
       },
     ],
+    details: result,
   };
 }
 
-type ToolResult = { content: { type: "text"; text: string }[] };
+type ToolResult = { content: { type: "text"; text: string }[]; details: Record<string, unknown> };
 
 /** Wrap a tool execute fn to catch 401 StravaApiErrors (revoked token mid-session). */
 function withRevocationGuard<A extends unknown[]>(
@@ -88,12 +90,10 @@ function createAuthStatusTool(deps: ToolDeps) {
         content: [
           {
             type: "text" as const,
-            text: JSON.stringify({
-              connected: true,
-              athleteId: tokens.athleteId,
-            }),
+            text: JSON.stringify({ connected: true, athleteId: tokens.athleteId }),
           },
         ],
+        details: { connected: true, athleteId: tokens.athleteId },
       };
     },
   };
@@ -189,8 +189,10 @@ function createActivitiesTool(deps: ToolDeps) {
         sufferScore: a.suffer_score ?? null,
       }));
 
+      const result = { activities: formatted };
       return {
-        content: [{ type: "text" as const, text: JSON.stringify({ activities: formatted }) }],
+        content: [{ type: "text" as const, text: JSON.stringify(result) }],
+        details: result,
       };
     }),
   };
@@ -255,6 +257,7 @@ function createActivityDetailTool(deps: ToolDeps) {
 
       return {
         content: [{ type: "text" as const, text: JSON.stringify(result) }],
+        details: result,
       };
     }),
   };
@@ -311,6 +314,7 @@ function createStatsTool(deps: ToolDeps) {
 
       return {
         content: [{ type: "text" as const, text: JSON.stringify(result) }],
+        details: result,
       };
     }),
   };
