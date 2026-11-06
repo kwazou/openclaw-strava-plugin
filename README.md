@@ -1,4 +1,4 @@
-# @alexd10s/openclaw-strava
+# @kwazou/openclaw-strava
 
 Turn OpenClaw into a Strava-aware running coach in minutes.
 
@@ -17,29 +17,17 @@ This community plugin connects your Strava account to OpenClaw so your agent can
 - Fast setup with OAuth linking through your OpenClaw gateway
 - Practical tools for weekly reviews, progress checks, and activity deep dives
 
-## Plugin page
-
-- ClawHub: `https://clawhub.ai/plugins/%40alexd10s%2Fopenclaw-strava`
-
 ## Install
 
-Recommended (ClawHub):
+Install directly from GitHub:
 
 ```bash
-openclaw plugins install clawhub:@alexd10s/openclaw-strava
+openclaw plugins install git:github.com/kwazou/openclaw-strava-plugin@main
 ```
 
-Alternative (npm spec):
+For a reproducible install, replace `main` with a release tag or commit hash.
 
-```bash
-openclaw plugins install @alexd10s/openclaw-strava
-```
-
-Local development install:
-
-```bash
-openclaw plugins install /path/to/openclaw-strava-plugin
-```
+Installing plugin code requires restarting the OpenClaw gateway.
 
 ## 60-second setup
 
@@ -75,20 +63,12 @@ openclaw config set plugins.entries.strava.config.clientSecret "YOUR_CLIENT_SECR
 - "Compare this week vs last week total distance and elevation."
 - "Give me a short coaching note based on my last long run."
 
-## Publish to ClawHub
+## Publish to npm
 
-This scaffold assumes:
-
-- package name: `@alexd10s/openclaw-strava`
-- repo: `AlexD10S/openclaw-strava-plugin`
-
-If you change either of those, update `package.json` before publishing.
+The package is named `@kwazou/openclaw-strava`. After publishing it to npm, it can also be installed with:
 
 ```bash
-npm i -g clawhub
-clawhub login
-clawhub package publish AlexD10S/openclaw-strava-plugin --dry-run
-clawhub package publish AlexD10S/openclaw-strava-plugin
+openclaw plugins install npm:@kwazou/openclaw-strava
 ```
 
 ## Security notes
@@ -101,6 +81,7 @@ clawhub package publish AlexD10S/openclaw-strava-plugin
 
 ```bash
 pnpm install
+pnpm build
 pnpm test
 pnpm typecheck
 ```
